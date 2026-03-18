@@ -10,7 +10,7 @@ A device booking system for organizations.
 - [x] create.html + POST endpoint — form saves to DB, redirects
 - [x] Delete endpoint — POST /devices/{id}/delete + delete button
 - [ ] Rename project to treasure (remove all "fuggs" references)
-- [ ] Update README
+- [x] Update README
 - [ ] Navigation menu — "Device" link in left sidebar → device list
 - [ ] Edit button — edit device info
 - [ ] Auto status — assigned = unavailable, unassigned = available (automatic)

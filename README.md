@@ -1,7 +1,11 @@
-# Treasure
+# Treasure 💰 
+
+![ASCII art](https://exp-explore.slack.com/files/U0AKFJ89UTZ/F0AM615U70B/ascii-art-text.png)
+
 
 A device booking system for organizations.
 
+---
 ## TODO 📋
 
 - [x] Device entity — pickupTime, bookedBy, getters/setters
@@ -14,7 +18,7 @@ A device booking system for organizations.
 - [ ] Navigation menu — "Device" link in left sidebar → device list
 - [ ] Edit button — edit device info
 - [ ] Auto status — assigned = unavailable, unassigned = available (automatic)
-
+---
 ## Requirements ⚙️
 
 ### Functional
@@ -30,6 +34,7 @@ A device booking system for organizations.
 - All data is saved to a database so nothing is lost on restart
 - The interface should be clean and easy to use
 - The app should be easy to set up and run locally
+---
 
 
 ## User Stories 👤
@@ -41,3 +46,29 @@ A device booking system for organizations.
 - As a user, I want to see who has booked a device so that I know who is responsible for it
 - As a user, I want the device status to update automatically so that I don't have to do it manually
 - As a user, I want to see the pickup time of a device so that I know when it will be returned
+---
+
+
+## Data modeling 🧩
+```mermaid
+erDiagram
+    USER {
+        int userId
+        string username
+    }
+
+    DEVICE {
+        int deviceId
+        string deviceName
+        string status
+    }
+
+    BOOKING {
+        int bookingId
+        int userId
+        int deviceId
+        datetime pickupTime
+    }
+
+    USER ||--o{ BOOKING : "makes"
+    DEVICE ||--o{ BOOKING : "assigned to"

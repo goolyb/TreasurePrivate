@@ -1,3 +1,7 @@
+# Treasur
+
+A device booking system for organizations.
+
 ## TODO
 
 - [x] Device entity — pickupTime, bookedBy, getters/setters

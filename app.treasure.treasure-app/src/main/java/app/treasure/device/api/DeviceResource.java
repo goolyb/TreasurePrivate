@@ -5,6 +5,8 @@ import io.quarkiverse.renarde.Controller;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.security.Authenticated;
+import io.quarkus.security.identity.SecurityIdentity;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
@@ -13,7 +15,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import app.treasure.device.domain.Device;
 import java.util.List;
-
 import org.jboss.resteasy.reactive.RestForm;
 
 @Authenticated
@@ -23,28 +24,25 @@ public class DeviceResource extends Controller
 	@Inject
 	DeviceRepository deviceRepository;
 
+	@Inject
+	SecurityIdentity identity;
+
 	@CheckedTemplate
 	public static class Templates
 	{
-		private Templates()
-		{
-		}
+		private Templates() {}
 
-		public static native TemplateInstance index(List<Device> devices); // Declares
-																			// the
-																			// index
-																			// template
-
+		public static native TemplateInstance index(List<Device> devices);
 		public static native TemplateInstance create();
+		public static native TemplateInstance editadmin(Device device);
+		public static native TemplateInstance editnormuser(Device device);
 	}
 
 	@GET
 	@Path("")
 	public TemplateInstance index()
 	{
-		List<Device> devices = deviceRepository.listAll(); // gets all devices
-															// and sends them to
-															// the page
+		List<Device> devices = deviceRepository.listAll();
 		return Templates.index(devices);
 	}
 
@@ -52,7 +50,19 @@ public class DeviceResource extends Controller
 	@Path("/new")
 	public TemplateInstance create()
 	{
-		return Templates.create(); // shows the create device page
+		return Templates.create();
+	}
+
+	@GET
+	@Path("/{id}/edit")
+	public TemplateInstance edit(@PathParam("id") Long id)
+	{
+		Device device = deviceRepository.findById(id);
+		if (identity.hasRole("admin") || identity.hasRole("SUPER_ADMIN")) {
+			return Templates.editnormuser(device);
+		} else {
+			return Templates.editadmin(device);
+		}
 	}
 
 	@POST
@@ -60,13 +70,27 @@ public class DeviceResource extends Controller
 	@Transactional
 	public void save(@RestForm String deviceName, @RestForm String status)
 	{
-		Device device = new Device(); // create the new object
-		device.setDeviceName(deviceName);
-		device.setStatus(status);
-        if (deviceName.matches(".*[a-zA-Z0-9].*")) {
-			deviceRepository.persist(device); // saves it
+		if (deviceName.matches(".*[a-zA-Z0-9].*")) {
+			Device device = new Device();
+			device.setDeviceName(deviceName);
+			device.setStatus(status);
+			deviceRepository.persist(device);
 		}
-			redirect(DeviceResource.class).index(); // reloads the site
+		redirect(DeviceResource.class).index();
+	}
+
+	@POST
+	@Path("/{id}/update")
+	@Transactional
+	public void update(@PathParam("id") Long id, @RestForm String deviceName)
+	{
+		if (!deviceName.matches(".*[a-zA-Z0-9].*")) {
+			redirect(DeviceResource.class).index();
+			return;
+		}
+		Device device = deviceRepository.findById(id);
+		device.setDeviceName(deviceName);
+		redirect(DeviceResource.class).index();
 	}
 
 	@POST
@@ -74,10 +98,8 @@ public class DeviceResource extends Controller
 	@Transactional
 	public void delete(@PathParam("id") Long id)
 	{
-		Device device = deviceRepository.findById(id); // searching for id, and
-														// assign it to variable
-		device.delete(); // deletes
-		redirect(DeviceResource.class).index(); // reloads the site
+		Device device = deviceRepository.findById(id);
+		device.delete();
+		redirect(DeviceResource.class).index();
 	}
-
 }

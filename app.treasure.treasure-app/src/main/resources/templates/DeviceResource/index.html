@@ -1,7 +1,7 @@
 {#include main.html}
 {#title}Devices{/title}
-<cds-button href="/devices/new">New device</cds-button>   
-<cds-table>
+<cds-button href="/devices/new">New device</cds-button>
+ <cds-table>
   <cds-table-head>
     <cds-table-header-row>
       <cds-table-header-cell>Name</cds-table-header-cell>
@@ -19,6 +19,13 @@
       <cds-table-cell>{device.status}</cds-table-cell>
       <cds-table-cell>{device.bookedName}</cds-table-cell>
       <cds-table-cell>{device.formattedPickupTime}</cds-table-cell>
+      <cds-table-cell>
+          <cds-table-cell>
+              <a href="/devices/{device.id}/edit">
+                  <button class="cds-btn">Edit</button>
+              </a>
+          </cds-table-cell>
+    </cds-table-cell>
     <cds-table-cell>                                                                                                                                                                                                                                
         <form method="post" action="/devices/{device.id}/delete">                                                                                                                                                                                     
             {#authenticityToken /}                                                                                                                                                                            

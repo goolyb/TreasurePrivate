@@ -27,6 +27,7 @@ A device booking system for organizations.
 - [x] remove fluggs name from website
 - [ ] Claim button — lets a regular user instantly claim a device; if already claimed by someone else, button is disabled; if claimed by you, button unclaims it
 - [ ] make it not possible to create an unnnamed Device
+- [ ] Move buttons in order: claim - edit - delete
 
 ---
 ## Requirements ⚙️

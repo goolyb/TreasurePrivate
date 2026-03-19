@@ -23,7 +23,8 @@ A device booking system for organizations.
 - [ ] Navigation menu — "Device" link in left sidebar → device list
 - [ ] Edit button — edit device info
 - [ ] Auto status — assigned = unavailable, unassigned = available (automatic)
-- [ ] fix a "New device" button
+- [x] fix a "New device" button
+- [ ] remove fluggs name from website 
 ---
 ## Requirements ⚙️
 

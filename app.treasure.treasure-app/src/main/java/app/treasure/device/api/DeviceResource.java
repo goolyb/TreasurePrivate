@@ -1,20 +1,24 @@
 package app.treasure.device.api;
 
+import app.treasure.member.domain.Member;
+import java.util.List;
+
+import org.jboss.resteasy.reactive.RestForm;
+
+import app.treasure.device.domain.Device;
 import app.treasure.device.repository.DeviceRepository;
+import app.treasure.member.repository.MemberRepository;
 import io.quarkiverse.renarde.Controller;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.security.Authenticated;
+import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import app.treasure.device.domain.Device;
-import java.util.List;
-
-import org.jboss.resteasy.reactive.RestForm;
 
 @Authenticated
 @Path("/devices")
@@ -22,6 +26,10 @@ public class DeviceResource extends Controller
 {
 	@Inject
 	DeviceRepository deviceRepository;
+	@Inject
+	SecurityIdentity securityIdentity;
+	@Inject
+	MemberRepository memberRepository;
 
 	@CheckedTemplate
 	public static class Templates
@@ -77,6 +85,27 @@ public class DeviceResource extends Controller
 														// assign it to variable
 		device.delete(); // deletes
 		redirect(DeviceResource.class).index(); // reloads the site
+	}
+
+	@POST
+	@Path("/{id}/claim")
+	@Transactional
+	public void claim(@PathParam("id") Long id)
+	{
+		Device device = deviceRepository.findById(id);
+		String username = securityIdentity.getPrincipal().getName();
+		Member currentmember = memberRepository.findByUsername(username);
+		if (device.getBookedBy() != null && device.getBookedBy().equals(currentmember))
+		{
+			device.setStatus("available");
+			device.setBookedBy(null);
+		}
+		else
+		{
+			device.setStatus("not available");
+			device.setBookedBy(currentmember);
+		}
+		redirect(DeviceResource.class).index();
 	}
 
 }

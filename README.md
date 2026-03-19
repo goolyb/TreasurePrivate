@@ -21,11 +21,11 @@ A device booking system for organizations.
 - [x] Rename project to treasure (remove all "fuggs" references)
 - [x] Update README
 - [x] Navigation menu — "Device" link in left sidebar → device list
-- [ ] Edit button — edit device info (admin edit menu[allows edditing booked by of user] and user edit menu[does not allow edditing booked by of user])
-- [ ] Auto status — assigned = unavailable, unassigned = available (automatic)
+- [ ] Edit button — separate admin and user edit views (admin can edit "Booked by"; user cannot)
+- [ ] Auto status — device becomes unavailable when assigned, available when unassigned
 - [x] fix a "New device" button
 - [x] remove fluggs name from website
-- [ ] add claim button (to instantly claim a device as reg user) if already claimed not by you it doesnt work, if already claimed by you pressing button unclaims it
+- [ ] Claim button — lets a regular user instantly claim a device; if already claimed by someone else, button is disabled; if claimed by you, button unclaims it
 
 ---
 ## Requirements ⚙️

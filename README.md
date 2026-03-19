@@ -20,11 +20,13 @@ A device booking system for organizations.
 - [x] Delete endpoint — POST /devices/{id}/delete + delete button
 - [x] Rename project to treasure (remove all "fuggs" references)
 - [x] Update README
-- [ ] Navigation menu — "Device" link in left sidebar → device list
-- [ ] Edit button — edit device info
+- [x] Navigation menu — "Device" link in left sidebar → device list
+- [ ] Edit button — edit device info (admin edit menu[allows edditing booked by of user] and user edit menu[does not allow edditing booked by of user])
 - [ ] Auto status — assigned = unavailable, unassigned = available (automatic)
 - [x] fix a "New device" button
-- [ ] remove fluggs name from website 
+- [x] remove fluggs name from website
+- [ ] add claim button (to instantly claim a device as reg user) if already claimed not by you it doesnt work, if already claimed by you pressing button unclaims it
+
 ---
 ## Requirements ⚙️
 

@@ -63,9 +63,10 @@ public class DeviceResource extends Controller
 		Device device = new Device(); // create the new object
 		device.setDeviceName(deviceName);
 		device.setStatus(status);
-		deviceRepository.persist(device); // saves it
-		redirect(DeviceResource.class).index(); // reloads the site1
-
+        if (deviceName.matches(".*[a-zA-Z0-9].*")) {
+			deviceRepository.persist(device); // saves it
+		}
+			redirect(DeviceResource.class).index(); // reloads the site
 	}
 
 	@POST

@@ -1,7 +1,5 @@
 package app.treasure.device.api;
 
-import app.treasure.member.domain.Member;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,13 +7,12 @@ import org.jboss.resteasy.reactive.RestForm;
 
 import app.treasure.device.domain.Device;
 import app.treasure.device.repository.DeviceRepository;
+import app.treasure.member.domain.Member;
 import app.treasure.member.repository.MemberRepository;
 import io.quarkiverse.renarde.Controller;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.security.Authenticated;
-import io.quarkus.security.identity.SecurityIdentity;
-import jakarta.annotation.security.RolesAllowed;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,9 +20,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import app.treasure.device.domain.Device;
-import java.util.List;
-import org.jboss.resteasy.reactive.RestForm;
 
 @Authenticated
 @Path("/devices")
@@ -98,7 +92,7 @@ public class DeviceResource extends Controller
 		{
 			Device device = new Device();
 			device.setDeviceName(deviceName);
-			device.setStatus(status);
+			device.setStatus("available");
 			deviceRepository.persist(device);
 		}
 		redirect(DeviceResource.class).index();

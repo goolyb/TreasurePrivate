@@ -1,5 +1,21 @@
 {#include main.html}
-{#moreStyles}                                                                                                                                                                                                                                      
+{#moreStyles} 
+<style>
+  :root {
+    --yellow: #f5c518;
+    --yellow-dark: #d4a90e;
+    --yellow-light: #fff9e0;
+    --red: #e63946;
+    --red-light: #fdecea;
+    --text: #1a1a1a;
+    --muted: #888;
+    --border: #e8e8e8;
+    --bg: #f7f7f5;
+    --white: #ffffff;
+    --sidebar-w: 200px;
+  }
+</style>
+
 <style>                                                                                                                                                                                                                                            
    .btn-claim {                                                                                                                                                                                                                                
     background: #f5c518;                                    
@@ -100,7 +116,17 @@
             {#for device in devices}
                 <cds-table-row>
                     <cds-table-cell>{device.deviceName}</cds-table-cell>
-                    <cds-table-cell>{device.status}</cds-table-cell>
+                    <cds-table-cell>
+                        {#if device.status == "available"}
+                          <div data-tag="" class="cds--tag cds--tag--green">
+                            <span class="cds--tag__label">Available</span>
+                          </div>
+                        {#else}
+                          <div data-tag="" class="cds--tag cds--tag--gray">
+                            <span class="cds--tag__label">Not available</span>
+                          </div>
+                        {/if}
+                    </cds-table-cell>
                     <cds-table-cell>{device.bookedName}</cds-table-cell>
                     <cds-table-cell>{device.formattedPickupTime}</cds-table-cell>
                     <cds-table-cell>

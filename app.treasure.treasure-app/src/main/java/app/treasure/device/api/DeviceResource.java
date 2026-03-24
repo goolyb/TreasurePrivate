@@ -1,6 +1,8 @@
 package app.treasure.device.api;
 
 import app.treasure.member.domain.Member;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.jboss.resteasy.reactive.RestForm;
@@ -139,11 +141,13 @@ public class DeviceResource extends Controller
 		{
 			device.setStatus("available");
 			device.setBookedBy(null);
+			device.setPickupTime(null);
 		}
 		else
 		{
 			device.setStatus("not available");
 			device.setBookedBy(currentmember);
+			device.setPickupTime(LocalDateTime.now());
 		}
 		redirect(DeviceResource.class).index();
 	}

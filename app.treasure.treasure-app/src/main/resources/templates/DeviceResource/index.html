@@ -1,6 +1,89 @@
 {#include main.html}
+{#moreStyles}                                                                                                                                                                                                                                      
+<style>                                                                                                                                                                                                                                            
+   .btn-claim {                                                                                                                                                                                                                                
+    background: #f5c518;                                    
+    color: #1a1a1a;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;                                                                                                                                                                                                                       
+    cursor: pointer;
+    font-size: 15px;                                                                                                                                                                                                                          
+    font-weight: 500;                                       
+    box-shadow: 0 4px 14px rgba(245, 197, 24, 0.35);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+  }
+                                                                                                                                                                                                                                              
+  .btn-claim:hover {                                                                                                                                                                                                                          
+    background: #e6b800;
+    transform: scale(1.05);                                                                                                                                                                                                                   
+    box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);         
+  }                                                                                                                                                                                                                                               
+</style>
+<style>                                                                                                                                                                                                                                            
+    .btn-delete {                                                                                                                                                                                                                               
+    background: #d32f2f;
+    color: #ffffff;                                                                                                                                                                                                                           
+    padding: 12px 24px;                                                                                                                                                                                                                       
+    border: none;
+    border-radius: 8px;                                                                                                                                                                                                                       
+    cursor: pointer;                                        
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.35);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+  }
+                                                                                                                                                                                                                                              
+  .btn-delete:hover {                                                                                                                                                                                                                         
+    background: #b71c1c;
+    transform: scale(1.05);                                                                                                                                                                                                                   
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.5);          
+  }                                                                                                                                                                                                                                               
+ </style>
+ <style>
+ .btn-edit {                                                                                                                                                                                                                                 
+    background: #888888;                 
+    color: #ffffff;                                                                                                                                                                                                                           
+    padding: 12px 24px;                                                                                                                                                                                                                       
+    border: none;                                                                                                                                                                                                                             
+    border-radius: 8px;                                     
+    cursor: pointer;                                                                                                                                                                                                                          
+    font-size: 15px;
+    font-weight: 500;                                                                                                                                                                                                                         
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);             
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }                                                                                                                                                                                                                                           
+   
+  .btn-edit:hover {                                                                                                                                                                                                                           
+    background: #707070;                                    
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  }                                                                                                                                                                                                                                        
+  </style>
+  <style>
+    .btn-new {                                                                                                                                                                                                                                  
+    background: #f57c00;                                                                                                                                                                                                                    
+    color: #ffffff;                                                                                                                                                                                                                           
+    padding: 12px 24px;                                                                                                                                                                                                                       
+    border: none;                                                                                                                                                                                                                             
+    border-radius: 8px;                                     
+    cursor: pointer;                                                                                                                                                                                                                          
+    font-size: 15px;
+    font-weight: 500;                                                                                                                                                                                                                         
+    box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);         
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+  }
+                                                                                                                                                                                                                                              
+  .btn-new:hover {                                          
+    background: #e65100;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(245, 124, 0, 0.5);                                                                                                                                                                                            
+  }
+  </style>
+
+{/moreStyles}
     {#title}Devices{/title}
-    <cds-button href="/devices/new">New device</cds-button>
+    <a href="/devices/new"><button class="btn-new">New device</button></a>
     <cds-table>
         <cds-table-head>
             <cds-table-header-row>
@@ -24,27 +107,27 @@
                         {#if device.bookedBy == null}
                         <form method="post" action="/devices/{device.id}/claim">
                                 {#authenticityToken /}
-                            <button type="submit" class="cds-btn cds-btn-danger">Claim</button>
+                            <button type="submit" class="btn-claim">Claim</button>
                         </form>
                         {#else if device.bookedBy.id == currentmember.id}
                         <form method="post" action="/devices/{device.id}/claim">
                             {#authenticityToken /}
-                            <button type="submit" class="cds-btn cds-btn-danger">Unclaim</button>
+                            <button type="submit" class="btn-claim">Unclaim</button>
                         </form>
                         {#else}
-                            <button disabled class="cds-btn cds-btn-danger">Claimed</button>
+                            <button disabled class="btn-claim">Claimed</button>
                        
                         {/if}
                     </cds-table-cell>
                     <cds-table-cell>
                         <a href="/devices/{device.id}/edit">
-                            <button class="cds-btn">Edit</button>
+                            <button class="btn-edit">Edit</button>
                         </a>
                     </cds-table-cell>
                     <cds-table-cell>
                         <form method="post" action="/devices/{device.id}/delete">
                                 {#authenticityToken /}
-                            <button type="submit" class="cds-btn cds-btn-danger">Delete</button>
+                            <button type="submit" class="btn-delete">Delete</button>
                         </form>
                     </cds-table-cell>
                 </cds-table-row>

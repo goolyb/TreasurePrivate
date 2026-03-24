@@ -1,10 +1,32 @@
 {#include main.html}
+{#moreStyles}
+<style>
+.btn-save {                                                                                                                                                                                                                                  
+    background: #f57c00;                                                                                                                                                                                                                    
+    color: #ffffff;                                                                                                                                                                                                                           
+    padding: 12px 24px;                                                                                                                                                                                                                       
+    border: none;                                                                                                                                                                                                                             
+    border-radius: 8px;                                     
+    cursor: pointer;                                                                                                                                                                                                                          
+    font-size: 15px;
+    font-weight: 500;                                                                                                                                                                                                                         
+    box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);         
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+  }
+                                                                                                                                                                                                                                              
+  .btn-save:hover {                                          
+    background: #e65100;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(245, 124, 0, 0.5);                                                                                                                                                                                            
+  }
+</style>
+{/moreStyles}
 {#title}New Device{/title}
 <form method="post" action="/devices/create">
     {#authenticityToken /}
     <p style="color:#ffab00; font-weight: bold;">New Device:</p>
     <p></p>
     <cds-text-input label="Device Name" name="deviceName"></cds-text-input>
-    <button type="submit" class="cds-btn cds-btn-primary">Save</button>
+    <button type="submit" class="btn-save">Save</button>
 </form>
 {/include}

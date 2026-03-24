@@ -32,6 +32,18 @@ A device booking system for organizations.
 - [ ] Fix pickupTime
 - [x] Fix claim button — show Claim if free, Unclaim if claimed by current user, disabled Claimed if taken by someone else
 
+### UI 🎨
+- [ ] Status badge — colored dot + text instead of plain text
+- [ ] Zebra stripes + row hover in table
+- [ ] Shrink action buttons (smaller padding)
+- [ ] Edit button — pencil icon
+- [ ] Delete button — trash icon
+- [ ] Claim/Unclaim button colors — yellow fill / yellow outline
+- [ ] Sidebar — icons + section labels (Menu / System)
+- [ ] Table toolbar — search input + record count
+- [ ] Pagination — "Showing 1–N of N" + page buttons
+- [ ] Fix "New device" button color (orange → yellow)
+
 ---
 ## Requirements ⚙️
 

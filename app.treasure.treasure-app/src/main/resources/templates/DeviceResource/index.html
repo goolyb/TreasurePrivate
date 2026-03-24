@@ -1,163 +1,276 @@
 {#include main.html}
 {#moreStyles} 
-<style>
-  :root {
-    --yellow: #f5c518;
-    --yellow-dark: #d4a90e;
-    --yellow-light: #fff9e0;
-    --red: #e63946;
-    --red-light: #fdecea;
-    --text: #1a1a1a;
-    --muted: #888;
-    --border: #e8e8e8;
-    --bg: #f7f7f5;
-    --white: #ffffff;
-    --sidebar-w: 200px;
-  }
-</style>
 
 <style>                                                                                                                                                                                                                                            
-   .btn-claim {                                                                                                                                                                                                                                
-    background: #f5c518;                                    
-    color: #1a1a1a;
-    padding: 12px 24px;
+  :root {                                                                                                                                                                                                                                          
+    --yellow: #f5c518;                                                                                                                                                                                                                             
+    --yellow-dark: #d4a90e;                                                                                                                                                                                                                        
+    --yellow-light: #fff9e0;
+    --red: #e63946;                                                                                                                                                                                                                                
+    --red-light: #fdecea;               
+    --text: #1a1a1a;                                                                                                                                                                                                                               
+    --muted: #888;                      
+    --border: #e8e8e8;                                                                                                                                                                                                                             
+    --bg: #f7f7f5;                      
+    --white: #ffffff;                                                                                                                                                                                                                              
+    --sidebar-w: 200px;                                                                                                                                                                                                                            
+  }
+</style> 
+<style>
+    .actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .btn-claim {
+    background: var(--yellow);
+    color: #3d2800;
     border: none;
-    border-radius: 8px;                                                                                                                                                                                                                       
+    padding: 9.5px 19px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16.5px;
+    font-weight: 550;
     cursor: pointer;
-    font-size: 15px;                                                                                                                                                                                                                          
-    font-weight: 500;                                       
-    box-shadow: 0 4px 14px rgba(245, 197, 24, 0.35);
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+    transition: background 0.3s ease, transform 0.3s ease;
   }
-                                                                                                                                                                                                                                              
-  .btn-claim:hover {                                                                                                                                                                                                                          
-    background: #e6b800;
-    transform: scale(1.05);                                                                                                                                                                                                                   
-    box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);         
-  }                                                                                                                                                                                                                                               
-</style>
-<style>                                                                                                                                                                                                                                            
-    .btn-delete {                                                                                                                                                                                                                               
-    background: #d32f2f;
-    color: #ffffff;                                                                                                                                                                                                                           
-    padding: 12px 24px;                                                                                                                                                                                                                       
-    border: none;
-    border-radius: 8px;                                                                                                                                                                                                                       
-    cursor: pointer;                                        
-    font-size: 15px;
-    font-weight: 500;
-    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.35);
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
-  }
-                                                                                                                                                                                                                                              
-  .btn-delete:hover {                                                                                                                                                                                                                         
-    background: #b71c1c;
-    transform: scale(1.05);                                                                                                                                                                                                                   
-    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.5);          
-  }                                                                                                                                                                                                                                               
- </style>
- <style>
- .btn-edit {                                                                                                                                                                                                                                 
-    background: #888888;                 
-    color: #ffffff;                                                                                                                                                                                                                           
-    padding: 12px 24px;                                                                                                                                                                                                                       
-    border: none;                                                                                                                                                                                                                             
-    border-radius: 8px;                                     
-    cursor: pointer;                                                                                                                                                                                                                          
-    font-size: 15px;
-    font-weight: 500;                                                                                                                                                                                                                         
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);             
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  }                                                                                                                                                                                                                                           
-   
-  .btn-edit:hover {                                                                                                                                                                                                                           
-    background: #707070;                                    
+  .btn-claim:hover {
+    background: var(--yellow);
+    box-shadow: 0 2px 8px rgba(245,197,24,0.4);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
-  }                                                                                                                                                                                                                                        
+  }
+
+  .btn-unclaim {
+    background: transparent;
+    color: #9a6000;
+    border: 1px solid var(--yellow);
+    padding: 9.5px 19px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16.5px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-unclaim:hover {
+    background: var(--yellow-light);
+    transform: scale(1.05); 
+    }
+
+  .btn-edit {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 9.5px 19px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16.5px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;align-items:center;gap:5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-edit:hover {
+    background: var(--bg); 
+    border-color: #ccc; 
+    transform: scale(1.05);
+  }
+
+  .btn-delete {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid rgba(230,57,70,0.25);
+    padding: 9.5px 19px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16.5px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;align-items:center;gap:5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-delete:hover { 
+    background: var(--red-light); 
+    border-color: rgba(230,57,70,0.5); 
+    transform: scale(1.05);
+    }
+</style>
+  <style>
+     table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 16px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #fafafa;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr:nth-child(even) { background: #fcfcfb; }
+  tbody tr:nth-child(even):hover { background: #f5f5f3; }
+
+  td {
+    padding: 14px 20px;
+    font-size: 15px;
+    vertical-align: middle;
+  }
+  </style>
+   <style>                                                                                                                                                                                                                                            
+    .table-wrap {                                                                                                                                                                                                                                    
+      background: var(--white);                                                                                                                                                                                                                      
+      border-radius: 14px;                
+      border: 1px solid var(--border);
+      overflow: hidden;                                                                                                                                                                                                                              
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }                                                                                                                                                                                                                                                
+  </style> 
+  <style>
+    .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .badge-unavailable {
+    background: #f1f1f1;
+    color: #666;
+  }
+  .badge-unavailable .badge-dot { background: #aaa; }
+  .badge-available {
+    background: #eafaf1;
+    color: #1a7a45;
+  }
+  .badge-available .badge-dot { background: #22c55e; }
+  .badge-maintenance {
+    background: #fff8e6;
+    color: #9a6000;
+  }
+  .badge-maintenance .badge-dot { background: var(--yellow-dark); }
   </style>
   <style>
-    .btn-new {                                                                                                                                                                                                                                  
-    background: #f57c00;                                                                                                                                                                                                                    
-    color: #ffffff;                                                                                                                                                                                                                           
-    padding: 12px 24px;                                                                                                                                                                                                                       
-    border: none;                                                                                                                                                                                                                             
-    border-radius: 8px;                                     
-    cursor: pointer;                                                                                                                                                                                                                          
-    font-size: 15px;
-    font-weight: 500;                                                                                                                                                                                                                         
-    box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);         
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;                                                                                                                                                              
+    .btn-primary {
+    background: var(--yellow);
+    color: #3d2800;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
-                                                                                                                                                                                                                                              
-  .btn-new:hover {                                          
-    background: #e65100;
+  .btn-primary:hover {
+    background: var(--yellow);
+    box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(245, 124, 0, 0.5);                                                                                                                                                                                            
   }
   </style>
 
 {/moreStyles}
     {#title}Devices{/title}
-    <a href="/devices/new"><button class="btn-new">New device</button></a>
-    <cds-table>
-        <cds-table-head>
-            <cds-table-header-row>
-                <cds-table-header-cell>Name</cds-table-header-cell>
-                <cds-table-header-cell>Status</cds-table-header-cell>
-                <cds-table-header-cell>Booked by</cds-table-header-cell>
-                <cds-table-header-cell>Pickup time</cds-table-header-cell>
-                <cds-table-header-cell></cds-table-header-cell>
-                <cds-table-header-cell></cds-table-header-cell>
-                <cds-table-header-cell></cds-table-header-cell>
-            </cds-table-header-row>
-        </cds-table-head>
-        <cds-table-body>
-            {#for device in devices}
-                <cds-table-row>
-                    <cds-table-cell>{device.deviceName}</cds-table-cell>
-                    <cds-table-cell>
-                        {#if device.status == "available"}
-                          <div data-tag="" class="cds--tag cds--tag--green">
-                            <span class="cds--tag__label">Available</span>
-                          </div>
-                        {#else}
-                          <div data-tag="" class="cds--tag cds--tag--gray">
-                            <span class="cds--tag__label">Not available</span>
-                          </div>
-                        {/if}
-                    </cds-table-cell>
-                    <cds-table-cell>{device.bookedName}</cds-table-cell>
-                    <cds-table-cell>{device.formattedPickupTime}</cds-table-cell>
-                    <cds-table-cell>
-                        {#if device.bookedBy == null}
-                        <form method="post" action="/devices/{device.id}/claim">
-                                {#authenticityToken /}
-                            <button type="submit" class="btn-claim">Claim</button>
-                        </form>
-                        {#else if device.bookedBy.id == currentmember.id}
-                        <form method="post" action="/devices/{device.id}/claim">
-                            {#authenticityToken /}
-                            <button type="submit" class="btn-claim">Unclaim</button>
-                        </form>
-                        {#else}
-                            <button disabled class="btn-claim">Claimed</button>
-                       
-                        {/if}
-                    </cds-table-cell>
-                    <cds-table-cell>
-                        <a href="/devices/{device.id}/edit">
-                            <button class="btn-edit">Edit</button>
-                        </a>
-                    </cds-table-cell>
-                    <cds-table-cell>
-                        <form method="post" action="/devices/{device.id}/delete">
-                                {#authenticityToken /}
-                            <button type="submit" class="btn-delete">Delete</button>
-                        </form>
-                    </cds-table-cell>
-                </cds-table-row>
-            {/for}
-        </cds-table-body>
-    </cds-table>
+    <a href="/devices/new">
+    <button class="btn-primary">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+      </svg>
+      New device
+    </button>
+    </a>
+    <div class="table-wrap">
+    <table>                                                                                                                                                                                                                                            
+      <thead>                                                                                                                                                                                                                                          
+        <tr>        
+          <th>Name</th>
+          <th>Status</th>
+          <th>Booked by</th>                                                                                                                                                                                                                           
+          <th>Pickup time</th>
+          <th></th>                                                                                                                                                                                                                                    
+        </tr>       
+      </thead>
+      <tbody>
+        {#for device in devices}                                                                                                                                                                                                                         
+        <tr>                                                                                                                                                                                                                                           
+          <td>{device.deviceName}</td>
+          <td>
+          {#if device.status == "available"}
+          <span class="badge badge-available">                                                                                                                                                                                                               
+            <span class="badge-dot"></span>                                                                                                                                                                                                                  
+            Available                                                                                                                                                                                                                                      
+          </span>
+          {#else}  
+            <span class="badge badge-unavailable">
+              <span class="badge-dot"></span>     
+              Not available                  
+          </span>                                                                                                                                                                                                                                        
+          {/if}
+        </td>
+          <td>{device.bookedName}</td>
+          <td>{device.formattedPickupTime}</td>                                                                                                                                                                                                        
+          <td>
+            <div class="actions">
+              {#if device.bookedBy == null}
+              <form method="post" action="/devices/{device.id}/claim">
+                {#authenticityToken /}
+                <button type="submit" class="btn-claim">Claim</button>
+              </form>
+              {#else if device.bookedBy.id == currentmember.id}
+              <form method="post" action="/devices/{device.id}/claim">
+                {#authenticityToken /}
+                <button type="submit" class="btn-unclaim">Unclaim</button>
+              </form>
+              {#else}
+                <button disabled class="btn-claim">Claimed</button>
+              {/if}
+              <button class="btn-edit" onclick="window.location='/devices/{device.id}/edit'">
+                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                </svg>
+                Edit
+              </button>
+              <form method="post" action="/devices/{device.id}/delete">
+                {#authenticityToken /}
+                <button type="submit" class="btn-delete">
+                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                  </svg>
+                  Delete
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>                                                                                                                                                                                                                                          
+      {/for}
+      </tbody>
+    </table>
+    </div>
+
 {/include}

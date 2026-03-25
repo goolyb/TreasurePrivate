@@ -46,9 +46,9 @@ public class DeviceResource extends Controller
 
 		public static native TemplateInstance create();
 
-		public static native TemplateInstance editadmin(Device device);
+		public static native TemplateInstance editAdmin(Device device);
 
-		public static native TemplateInstance editnormuser(Device device);
+		public static native TemplateInstance editUser(Device device);
 	}
 
 	@GET
@@ -75,11 +75,11 @@ public class DeviceResource extends Controller
 		Device device = deviceRepository.findById(id);
 		if (identity.hasRole("admin") || identity.hasRole("SUPER_ADMIN"))
 		{
-			return Templates.editadmin(device);
+			return Templates.editAdmin(device);
 		}
 		else
 		{
-			return Templates.editnormuser(device);
+			return Templates.editUser(device);
 		}
 	}
 

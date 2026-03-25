@@ -103,7 +103,8 @@
       "Bash(git -C /home/oleh/Downloads/Treasure log --oneline)",
       "Bash(git -C /home/oleh/Downloads/Treasure log --all --oneline)",
       "Bash(mvn:*)",
-      "Bash(docker-compose:*)"
+      "Bash(docker-compose:*)",
+      "Bash(fuser -k 8080/tcp)"
     ]
   }
 }

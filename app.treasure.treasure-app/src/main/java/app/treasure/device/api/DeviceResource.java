@@ -10,6 +10,8 @@ import app.treasure.device.repository.DeviceRepository;
 import app.treasure.member.domain.Member;
 import app.treasure.member.repository.MemberRepository;
 import io.quarkiverse.renarde.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.security.Authenticated;
@@ -25,6 +27,8 @@ import jakarta.ws.rs.PathParam;
 @Path("/devices")
 public class DeviceResource extends Controller
 {
+	private static final Logger LOG = LoggerFactory.getLogger(DeviceResource.class);
+
 	@Inject
 	DeviceRepository deviceRepository;
 	@Inject
@@ -46,11 +50,10 @@ public class DeviceResource extends Controller
 
 		public static native TemplateInstance create();
 
-		public static native TemplateInstance editAdmin(Device device);
+		public static native TemplateInstance editAdmin(Device device, List<Member> members);
 
 		public static native TemplateInstance editUser(Device device);
 	}
-
 	@GET
 	@Path("")
 	public TemplateInstance index()
@@ -75,7 +78,7 @@ public class DeviceResource extends Controller
 		Device device = deviceRepository.findById(id);
 		if (identity.hasRole("admin") || identity.hasRole("SUPER_ADMIN"))
 		{
-			return Templates.editAdmin(device);
+			return Templates.editAdmin(device, memberRepository.listAll());
 		}
 		else
 		{
@@ -101,7 +104,7 @@ public class DeviceResource extends Controller
 	@POST
 	@Path("/{id}/update")
 	@Transactional
-	public void update(@PathParam("id") Long id, @RestForm String deviceName)
+	public void update(@PathParam("id") Long id, @RestForm String deviceName, @RestForm String bookedBy)
 	{
 		if (!deviceName.matches(".*[a-zA-Z0-9].*"))
 		{
@@ -110,6 +113,9 @@ public class DeviceResource extends Controller
 		}
 		Device device = deviceRepository.findById(id);
 		device.setDeviceName(deviceName);
+		Member member = memberRepository.findByUsername(bookedBy);
+		LOG.debug("bookedBy param: {}, member found: {}", bookedBy, member);
+		device.setBookedBy(member);
 		redirect(DeviceResource.class).index();
 	}
 
@@ -118,6 +124,7 @@ public class DeviceResource extends Controller
 	@Transactional
 	public void delete(@PathParam("id") Long id)
 	{
+
 		Device device = deviceRepository.findById(id);
 		device.delete();
 		redirect(DeviceResource.class).index();

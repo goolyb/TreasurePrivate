@@ -83,12 +83,13 @@
   }
 
   .form-card-icon {
-    width: 48px; height: 48px;
+    width: 52px; height: 52px;
     background: var(--yellow-light);
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     color: var(--yellow-dark);
     flex-shrink: 0;
+    border: 2px solid #f5c51833;
   }
 
   .form-card-header-text h3 { font-size: 18px; font-weight: 600; }
@@ -168,7 +169,7 @@
     <div class="form-body">
       <div class="field">
         <label class="field-label">Device name <span class="required">*</span></label>
-        <input class="field-input" type="text" name="deviceName" placeholder="e.g. MacBook Pro 14&quot;" id="nameInput" oninput="validate()">
+        <input class="field-input" type="text" maxlength="50" name="deviceName" placeholder="e.g. MacBook Pro 14&quot;" id="nameInput" oninput="validate()">
         <span class="field-hint">Must be unique and descriptive</span>
         <span class="field-error" id="nameError" style="display:none">
           <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>

@@ -30,7 +30,7 @@ A device booking system for organizations.
 - [x] Move buttons in order: claim - edit - delete
 - [x] Make a good looking UI
 - [x] Fix pickupTime
-- [x] Fix claim button — show Claim if free, Unclaim if claimed by current user, disabled Claimed if taken by someone else
+- [x] Fix claim button — show Claim if free, Unclaim if claimed by current user, disabled Claimed if taken by someone else.
 ---
 ## Requirements ⚙️
 

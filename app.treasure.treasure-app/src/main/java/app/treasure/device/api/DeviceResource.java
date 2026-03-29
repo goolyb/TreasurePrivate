@@ -32,19 +32,14 @@ public class DeviceResource extends Controller
 	@Inject
 	DeviceRepository deviceRepository;
 	@Inject
-	SecurityIdentity securityIdentity;
-	@Inject
 	MemberRepository memberRepository;
 
 	@Inject
-	SecurityIdentity identity;
+	SecurityIdentity securityIdentity;
 
 	@CheckedTemplate
 	public static class Templates
 	{
-		private Templates()
-		{
-		}
 
 		public static native TemplateInstance index(List<Device> devices, Member currentmember, List<Member> members);
 
@@ -76,7 +71,8 @@ public class DeviceResource extends Controller
 	public TemplateInstance edit(@PathParam("id") Long id)
 	{
 		Device device = deviceRepository.findById(id);
-		if (identity.hasRole("admin") || identity.hasRole("SUPER_ADMIN"))
+		System.out.println(securityIdentity.getRoles());
+		if (securityIdentity.hasRole("admin") || securityIdentity.hasRole("SUPER_ADMIN"))
 		{
 			return Templates.editAdmin(device, memberRepository.listAll());
 		}
@@ -138,10 +134,10 @@ public class DeviceResource extends Controller
 		Device device = deviceRepository.findById(id);
 		Member member = memberRepository.findByUsername(bookedBy);
 		LOG.info("member found: {}", member);
-		LOG.info("bookedBy param: {}", bookedBy);  
-			device.setBookedBy(member);
-			device.setStatus("not available");
-			device.setPickupTime(LocalDateTime.now());
-			redirect(DeviceResource.class).index();
+		LOG.info("bookedBy param: {}", bookedBy);
+		device.setBookedBy(member);
+		device.setStatus("not available");
+		device.setPickupTime(LocalDateTime.now());
+		redirect(DeviceResource.class).index();
 	}
 }
